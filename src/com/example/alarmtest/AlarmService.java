@@ -28,11 +28,17 @@ public class AlarmService extends Service{
 		AlarmManager manager=(AlarmManager)getSystemService(ALARM_SERVICE);		
 		Calendar calendar=Calendar.getInstance();
 	    calendar.setTimeInMillis(System.currentTimeMillis());
-	   // calendar.add(Calendar.SECOND, 5);
+	    //  calendar.add(Calendar.SECOND, 5);
+	
 	    SharedPreferences prefs=getSharedPreferences("data",MODE_PRIVATE);
-	    calendar.set(Calendar.HOUR_OF_DAY, prefs.getInt("hour", 0));
-	    calendar.set(Calendar.MINUTE, prefs.getInt("minute", 0));
-	    Log.v("TAG", "Calendar2="+calendar.toString());	
+	    int minute=prefs.getInt("minute", 0);
+	    int hour=prefs.getInt("hour", 0);
+	    Log.v("TAG", "设定的时间是："+hour+"时"+minute+"分0秒");
+	    calendar.set(Calendar.HOUR_OF_DAY, hour);
+	    calendar.set(Calendar.MINUTE,minute);
+	    calendar.set(Calendar.SECOND, 0);
+	    
+	    
 		Intent i=new Intent(this,AlarmReceiver.class);
 		PendingIntent pi=PendingIntent.getBroadcast(this,0,i,0);
 		manager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pi);

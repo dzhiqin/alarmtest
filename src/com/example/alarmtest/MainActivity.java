@@ -58,11 +58,11 @@ public class MainActivity extends Activity {
 						SharedPreferences prefs=getSharedPreferences("data",MODE_PRIVATE);
 						SharedPreferences.Editor editor=prefs.edit();
 						
-						editor.putInt("hour", myCalendar.HOUR_OF_DAY);
-						editor.putInt("minute", myCalendar.MINUTE);
+						editor.putInt("hour", hourOfDay);
+						editor.putInt("minute", minute);
 						editor.commit();
 					
-						Log.v("TAG", "hour of day="+String.valueOf(myCalendar.HOUR_OF_DAY));
+						
 						//可以定义类AlarmService，实现闹钟设置
 						//也可以在本MainActivity里实现闹钟设置
 						Intent intent=new Intent(MainActivity.this,AlarmService.class);
